@@ -2,6 +2,8 @@
 
 working-light-agent 是一个 Electron 桌面透明悬浮状态灯，用来显示 Codex 和 Claude 当前状态。
 
+![alt text](image.png)
+
 第一阶段已经支持：
 
 - 开发模式启动 Electron 悬浮窗
@@ -405,3 +407,6 @@ Windows：
 ```bash
 AGENT_LIGHT_HOME=/tmp/agent-light node dist/cli/agent-light.js status --json
 ```
+
+如果本项目对你有帮助，可以给作者微信点个关注，给个小小的鼓励，感谢
+![alt text](扫码_搜索联合传播样式-标准色版.png)
