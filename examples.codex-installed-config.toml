@@ -1,0 +1,55 @@
+# Add or merge this into ~/.codex/config.toml after installing
+# /Applications/CodeAgentTrafficLight.app from the DMG.
+# After adding hooks, open Codex and run /hooks once to review/trust them.
+#
+# Keep any existing notify = [...] entry if you still need it for other tools
+# such as Codex Computer Use. Hooks drive the traffic light status; notify is
+# only a coarse turn-ended callback.
+# If an old notify wrapper calls agent-light set codex done, remove that
+# traffic-light part or it can overwrite a waiting state at turn end.
+
+[[hooks.UserPromptSubmit]]
+[[hooks.UserPromptSubmit.hooks]]
+type = "command"
+command = "node \"/Applications/CodeAgentTrafficLight.app/Contents/Resources/app.asar.unpacked/dist/cli/agent-light-hook.js\" codex UserPromptSubmit"
+timeout = 5
+statusMessage = "CodeAgentTrafficLight: Codex working"
+
+[[hooks.PreToolUse]]
+matcher = ".*"
+[[hooks.PreToolUse.hooks]]
+type = "command"
+command = "node \"/Applications/CodeAgentTrafficLight.app/Contents/Resources/app.asar.unpacked/dist/cli/agent-light-hook.js\" codex PreToolUse"
+timeout = 5
+statusMessage = "CodeAgentTrafficLight: Codex working"
+
+[[hooks.PermissionRequest]]
+matcher = ".*"
+[[hooks.PermissionRequest.hooks]]
+type = "command"
+command = "node \"/Applications/CodeAgentTrafficLight.app/Contents/Resources/app.asar.unpacked/dist/cli/agent-light-hook.js\" codex PermissionRequest"
+timeout = 5
+statusMessage = "CodeAgentTrafficLight: Codex waiting"
+
+[[hooks.Stop]]
+[[hooks.Stop.hooks]]
+type = "command"
+command = "node \"/Applications/CodeAgentTrafficLight.app/Contents/Resources/app.asar.unpacked/dist/cli/agent-light-hook.js\" codex Stop"
+timeout = 5
+statusMessage = "CodeAgentTrafficLight: Codex done"
+
+[[hooks.SubagentStart]]
+matcher = ".*"
+[[hooks.SubagentStart.hooks]]
+type = "command"
+command = "node \"/Applications/CodeAgentTrafficLight.app/Contents/Resources/app.asar.unpacked/dist/cli/agent-light-hook.js\" codex SubagentStart"
+timeout = 5
+statusMessage = "CodeAgentTrafficLight: Codex subagent working"
+
+[[hooks.SubagentStop]]
+matcher = ".*"
+[[hooks.SubagentStop.hooks]]
+type = "command"
+command = "node \"/Applications/CodeAgentTrafficLight.app/Contents/Resources/app.asar.unpacked/dist/cli/agent-light-hook.js\" codex SubagentStop"
+timeout = 5
+statusMessage = "CodeAgentTrafficLight: Codex subagent done"

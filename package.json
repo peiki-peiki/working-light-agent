@@ -1,0 +1,76 @@
+{
+  "name": "code-agent-traffic-light",
+  "version": "0.1.0",
+  "description": "Desktop floating traffic light for Codex and Claude Code status.",
+  "main": "dist/main/main.js",
+  "private": true,
+  "bin": {
+    "agent-light": "dist/cli/agent-light.js",
+    "agent-light-hook": "dist/cli/agent-light-hook.js",
+    "agent-light-run": "dist/cli/agent-light-run.js"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "pnpm run build:main && pnpm run build:renderer",
+    "build:main": "tsc -p tsconfig.node.json",
+    "build:renderer": "vite build",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.node.json --noEmit",
+    "test": "vitest run",
+    "start": "electron .",
+    "dist": "pnpm run build && electron-builder"
+  },
+  "dependencies": {
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.15",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "electron": "^31.2.1",
+    "electron-builder": "^24.13.3",
+    "typescript": "^5.5.4",
+    "vite": "^4.5.5",
+    "vitest": "^0.34.6"
+  },
+  "build": {
+    "appId": "dev.codeagent.trafficlight",
+    "productName": "CodeAgentTrafficLight",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/main/**/*",
+      "dist/shared/**/*",
+      "dist/renderer/**/*",
+      "dist/cli/**/*",
+      "package.json"
+    ],
+    "asarUnpack": [
+      "dist/cli/**/*",
+      "dist/shared/**/*"
+    ],
+    "electronDownload": {
+      "mirror": "https://npmmirror.com/mirrors/electron/"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    }
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "electron",
+      "esbuild"
+    ]
+  }
+}

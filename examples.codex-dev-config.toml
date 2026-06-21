@@ -1,0 +1,50 @@
+# Development-only Codex hooks for this repo.
+# Add or merge this into ~/.codex/config.toml when running from the repo root
+# after `pnpm run build`.
+# After adding hooks, open Codex and run /hooks once to review/trust them.
+
+[[hooks.UserPromptSubmit]]
+[[hooks.UserPromptSubmit.hooks]]
+type = "command"
+command = "node dist/cli/agent-light-hook.js codex UserPromptSubmit"
+timeout = 5
+statusMessage = "CodeAgentTrafficLight: Codex working"
+
+[[hooks.PreToolUse]]
+matcher = ".*"
+[[hooks.PreToolUse.hooks]]
+type = "command"
+command = "node dist/cli/agent-light-hook.js codex PreToolUse"
+timeout = 5
+statusMessage = "CodeAgentTrafficLight: Codex working"
+
+[[hooks.PermissionRequest]]
+matcher = ".*"
+[[hooks.PermissionRequest.hooks]]
+type = "command"
+command = "node dist/cli/agent-light-hook.js codex PermissionRequest"
+timeout = 5
+statusMessage = "CodeAgentTrafficLight: Codex waiting"
+
+[[hooks.Stop]]
+[[hooks.Stop.hooks]]
+type = "command"
+command = "node dist/cli/agent-light-hook.js codex Stop"
+timeout = 5
+statusMessage = "CodeAgentTrafficLight: Codex done"
+
+[[hooks.SubagentStart]]
+matcher = ".*"
+[[hooks.SubagentStart.hooks]]
+type = "command"
+command = "node dist/cli/agent-light-hook.js codex SubagentStart"
+timeout = 5
+statusMessage = "CodeAgentTrafficLight: Codex subagent working"
+
+[[hooks.SubagentStop]]
+matcher = ".*"
+[[hooks.SubagentStop.hooks]]
+type = "command"
+command = "node dist/cli/agent-light-hook.js codex SubagentStop"
+timeout = 5
+statusMessage = "CodeAgentTrafficLight: Codex subagent done"
